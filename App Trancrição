@@ -87,33 +87,3 @@ class SpeechApp(ctk.CTk):
             threading.Thread(target=self.listen_microphone, daemon=True).start()
         else:
             self.listening = False
-            self.listen_button.configure(text="Iniciar Transcrição")
-
-    def listen_microphone(self):
-        stream = self.audio.open(format=pyaudio.paInt16, channels=1, rate=16000,
-                                 input=True, frames_per_buffer=8000)
-        stream.start_stream()
-        while self.listening:
-            data = stream.read(4000, exception_on_overflow=False)
-            if self.recognizer.AcceptWaveform(data):
-                result = self.recognizer.Result()
-                text = json.loads(result).get("text", "")
-                if text:
-                    self.textbox.insert("end", text.strip().capitalize() + ". ")
-                    self.textbox.see("end")
-        stream.stop_stream()
-        stream.close()
-
-    def abrir_libras(self):
-        texto = self.textbox.get("1.0", "end").strip()
-        if not texto:
-            return
-
-        texto_url = urllib.parse.quote(texto)
-        url = f"https://www.handtalk.me/tradutor/?text={texto_url}"
-        webbrowser.open(url)
-
-
-if __name__ == "__main__":
-    app = SpeechApp()
-    app.mainloop()
