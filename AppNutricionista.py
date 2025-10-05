@@ -12,16 +12,6 @@ app.geometry("500x700")
 # Cor de fundo rosa mais forte
 app.configure(fg_color="#ffb6c1")
 
-# --- Fatores de atividade física ---
-fatores_atividade = {
-    "Sedentário (pouco ou nenhum exercício)": 1.2,
-    "Levemente ativo (1-3 dias/semana)": 1.375,
-    "Moderadamente ativo (3-5 dias/semana)": 1.55,
-    "Muito ativo (6-7 dias/semana)": 1.725,
-    "Extremamente ativo (treino pesado 2x/dia)": 1.9
-}
-
-
 def mostrar_resultado(tmb, fator):
     tdee = tmb * fator
 
@@ -128,15 +118,6 @@ label_idade = ctk.CTkLabel(frame_inputs, text="Idade:", text_color="black")
 label_idade.pack(pady=5)
 entry_idade = ctk.CTkEntry(frame_inputs, placeholder_text="Ex: 25")
 entry_idade.pack(pady=5)
-
-
-sexo_var = ctk.StringVar(value="Mulher")
-label_sexo = ctk.CTkLabel(frame_inputs, text="Sexo:", text_color="black")
-label_sexo.pack(pady=5)
-radio_homem = ctk.CTkRadioButton(frame_inputs, text="Homem", variable=sexo_var, value="Homem")
-radio_mulher = ctk.CTkRadioButton(frame_inputs, text="Mulher", variable=sexo_var, value="Mulher")
-radio_homem.pack()
-radio_mulher.pack()
 
 atividade_var = ctk.StringVar(value=list(fatores_atividade.keys())[0])
 label_atividade = ctk.CTkLabel(frame_inputs, text="Nível de atividade física:", text_color="black")
