@@ -91,21 +91,7 @@ public class CalculadoraSolucoes extends JFrame {
             case "Tema" -> escolherCorTema();
             case "=" -> {
                 calcular();
-                operador = "";
-            }
-            default -> {
-                if (comando.matches("[+\\-*/]")) {
-                    calcular();
-                    operador = comando;
-                    primeiroNumero = Double.parseDouble(display.getText());
-                    novoNumero = true;
-                } else if (comando.matches("[0-9]") || comando.equals(".")) {
-                    if (novoNumero) {
-                        display.setText(comando.equals(".") ? "0." : comando);
-                        novoNumero = false;
-                    } else {
-                        display.setText(display.getText() + comando);
-                    }
+                operador = ""
                 }
             }
         }
@@ -193,3 +179,4 @@ public class CalculadoraSolucoes extends JFrame {
         SwingUtilities.invokeLater(CalculadoraSolucoes::new);
     }
 }
+
